@@ -13,7 +13,7 @@
 #include<climits>
 using namespace std;
 
-//Merge Sort
+//Merge Sort >>> MergeSort(array,initial_index,final_index) >> Ascending
 
 void merge(int arr[],int left, int mid,int right)
 {
@@ -34,7 +34,7 @@ void merge(int arr[],int left, int mid,int right)
 }
 
 void MergeSort(int arr[],int left, int right){
-	if(left==right)
+	if(left==right) //Base Case (single element)
 		return;
 	MergeSort(arr,left,(left+right)/2);
 	MergeSort(arr,(left+right)/2+1,right);
