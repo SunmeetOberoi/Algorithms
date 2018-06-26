@@ -1,2 +1,2 @@
 # Algorithms
-Some common algorithms
+Some Algorithms
