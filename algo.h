@@ -73,7 +73,7 @@ void HeapSort(int arr[],int heap_size)
 }
 //END
 
-//Quick Sort >>> QuickSort(array, initial_index, final_index)
+//Quick Sort >>> QuickSort(array, initial_index, final_index) >> Ascending
 int partition(int arr[],int a,int b)
 {
 	int x=arr[b];
@@ -102,5 +102,21 @@ void QuickSort(int arr[],int a,int b)
 }
 //END
 
+//Counting Sort >>> CountingSort(array,resultArray,size) >> Ascending (STABLE)
+#define MAX 100000 //vector can also be used
+void CountingSort(int arr[],int ans[],int n){  //arr2 must have a size of n+1
+	int count[MAX]={0};
+	for(int i=0;i<n;i++)
+		count[arr[i]]++;
+
+	for(int i=1;i<MAX;i++)
+		count[i]=count[i]+count[i-1];
+
+	for(int i=n-1;i>=0;i--){
+		ans[count[arr[i]]]=arr[i];
+		count[arr[i]]--;
+	}
+}
+//END
 
 #endif /* ALGO_H_ */
