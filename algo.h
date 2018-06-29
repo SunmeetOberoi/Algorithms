@@ -119,4 +119,39 @@ void CountingSort(int arr[],int ans[],int n){  //arr2 must have a size of n+1
 }
 //END
 
+//Radix Sort >>> RadixSort(array, size) >> Ascending
+int getMax(int arr[],int n){
+	int max=0;
+	for(int i=0;i<n;i++)
+		if(arr[i]>max)
+			max=arr[i];
+	return max;
+}
+void countSortrad(int arr[],int n,int t){
+	int ans[n],count[10]={0};
+
+	for(int i=0;i<n;i++)
+		count[(arr[i]/t)%10]++;
+
+	for(int i=1;i<10;i++)
+		count[i]+=count[i-1];
+
+	for(int i=n-1;i>=0;i--){
+		ans[count[(arr[i]/t)%10]-1]=arr[i];
+		count[(arr[i]/t)%10]--;
+	}
+
+	for(int i=0;i<n;i++)
+		arr[i]=ans[i];
+}
+void RadixSort(int arr[],int n){
+	int max=getMax(arr,n);
+	for(int t=1;max/t>0;t*=10){
+		countSortrad(arr,n,t);
+	}
+}
+//END
+
+
+
 #endif /* ALGO_H_ */
