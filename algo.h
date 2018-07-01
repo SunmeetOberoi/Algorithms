@@ -178,5 +178,17 @@ void bucketSort(float arr[],int n){
 }
 //END
 
+//Order Statistics >>>RandomizedSelect(arr,initial index,final index,order) >> Random
+
+int RandomizedSelect(int arr[],int l, int r, int i){
+	int q = randPivot(arr,l,r);
+	int k = q-l+1;
+	if(i==k)
+		return arr[q];
+	if(i<k)
+		return RandomizedSelect(arr,l,q-1,i);
+	return RandomizedSelect(arr,q+1,r,i-k);
+}
+//END
 
 #endif /* ALGO_H_ */
