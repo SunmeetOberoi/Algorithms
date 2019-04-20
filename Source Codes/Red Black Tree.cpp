@@ -13,15 +13,15 @@ class RBTree {
 		RBNode *right;
 		RBNode *parent;
 		RBNode() {}
-		RBNode(int k, int c, RBNode *l, RBNode *r, RBNode *p) {
-			key = k;
-			color = c;
-			left = l;
-			right = r;
-			parent = p;
+		RBNode(void *t) {
+			key = -1;
+			color = 0;
+			left = NULL;
+			right = NULL;
+			parent = NULL;
 		}
 	};
-	RBNode *NIL = new RBNode(NULL, NULL, NULL, NULL, NULL);
+	RBNode *NIL = new RBNode(NULL);
 	RBNode *root = NIL;
 	void insert_fixup(RBNode* node);
 	void insert(RBNode* node);
@@ -41,7 +41,7 @@ public:
 	}
 	void delete_node(int x);
 	void create_and_insert(int x);
-	void preorder(RBNode *x);
+	void inorder(RBNode *x);
 	RBNode *tree_minimum(RBNode *x) {
 		RBNode *y = x;
 		while (y->left != NIL)
@@ -174,13 +174,13 @@ void RBTree::create_and_insert(int x) {
 	insert(newNode);
 }
 
-void RBTree::preorder(RBNode *x) {
+void RBTree::inorder(RBNode *x) {
 	if (x == NIL) {
 		return;
 	}
-	preorder(x->left);
+	inorder(x->left);
 	cout << x->key << ":" << (x->color == 1 ? "RED" : "BLACK") << "\t";
-	preorder(x->right);
+	inorder(x->right);
 }
 
 void RBTree::transplant(RBNode *u, RBNode *v) {
@@ -293,14 +293,14 @@ int main() {
 		T.create_and_insert(x);
 	} while (x);
 	cout << endl << endl << endl;
-	T.preorder(T.get_root());
+	T.inorder(T.get_root());
 	cout << endl << endl << endl;
 	do {
 		cin >> x;
 		T.delete_node(x);
 	} while (x);
 	cout << endl << endl << endl;
-	T.preorder(T.get_root());
+	T.inorder(T.get_root());
 	_getch();
 	return 0;
 }
