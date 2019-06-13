@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Bottom-Up
 int** matrix_chain_order(vector<int> p) {
 
 	// size
@@ -50,6 +51,37 @@ void print_optimal_parens(int** s, int i, int j) {
 }
 
 
+// Top-Down
+int lookup_chain(int** m, vector<int> p, int i, int j) {
+	if (m[i][j] < INT_MAX)
+		return m[i][j];
+	if (i == j)
+		m[i][j] = 0;
+	else {
+		int q;
+		for (int k = i;k <= j - 1;k++) {
+			q = lookup_chain(m, p, i, k) + lookup_chain(m, p, k + 1, j) + p[i - 1] * p[k] * p[j];
+			if (q < m[i][j])
+				m[i][j] = q;
+		}
+	}
+	return m[i][j];
+}
+
+int memoized_matrix_chain(vector<int> p) {
+	int n = p.size() - 1;
+
+	int** m = new int*[n + 1];
+	for (int i = 0;i <= n;i++) {
+		m[i] = new int[n + 1];
+		for (int j = 0;j <= n;j++) {
+			m[i][j] = INT_MAX;
+		}
+	}
+	return lookup_chain(m, p, 1, n);
+}
+
+
 int main() {
 	vector<int> p;
 	int n;
@@ -61,5 +93,6 @@ int main() {
 		p.push_back(temp);
 	}
 	print_optimal_parens(matrix_chain_order(p), 1, n);
+	cout << endl << "Total Calculations: " << memoized_matrix_chain(p); // calculated using top-down approach
 	return 0;
 }
