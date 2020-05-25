@@ -109,7 +109,7 @@ int main(){
     g.add_edge(4, 5);
     g.add_edge(5, 5);
     vector<DFSNode> DFSforest = DFS(g);
-    cout<<"d f"<<endl;
+    cout<<"\td f"<<endl;
     for(int i=0;i<g.vertices;i++)
         cout<<i<<": \n\t"<<DFSforest[i].discovered<<" "<<DFSforest[i].finished<<endl;
     return 0;
