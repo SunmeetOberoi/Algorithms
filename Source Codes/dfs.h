@@ -44,10 +44,10 @@ Graph::Graph(int size, bool isDirected=true){
 }
 
 
-void DFS_visit(Graph g, int u, vector<DFSNode> &info, int &time);
+void DFS_visit(Graph &g, int u, vector<DFSNode> &info, int &time);
 
 
-vector<DFSNode> DFS(Graph g){
+vector<DFSNode> DFS(Graph &g){
     /***
      * Performs Depth-first search on the graph, 
      * responsible for selecting every individual component 
@@ -72,7 +72,7 @@ vector<DFSNode> DFS(Graph g){
 }
 
 
-void DFS_visit(Graph g, int u, vector<DFSNode> &info, int &time){
+void DFS_visit(Graph &g, int u, vector<DFSNode> &info, int &time){
     /***
      * Marks the discovery of a node and further
      * explores the adjacency list of that node.
